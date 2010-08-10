@@ -1,0 +1,3 @@
+include ventroulette/config/deployment.ini_tmpl
+recursive-include ventroulette/public *
+recursive-include ventroulette/templates *

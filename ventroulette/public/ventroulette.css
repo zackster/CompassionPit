@@ -1,0 +1,27 @@
+#chatWindow {
+	border: 1px dashed blue;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.chatMessageEven {
+	background-color: lightblue;
+}
+
+.chatMessageOdd {
+	background-color: white;
+}
+
+#status {
+	font-weight: bold;
+}
+
+.errorMessage {
+	color: red;
+}
+
+.infoMessage {
+	color: blue;
+}
