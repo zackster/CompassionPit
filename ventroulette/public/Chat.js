@@ -32,6 +32,7 @@ function status(msg, class) {
 
 var chatId = -1;
 var other;
+var hasPartner = false;
 
 $(document).ready(
 	function() {
@@ -49,6 +50,8 @@ $(document).ready(
 					$.getJSON(
 							'/Chat/newPartner', {chatId: chatId}, 
 							function(data) {
+								hasPartner = false;
+								addMessage('System', 'Please wait while we find you a new chat partner.');
 								getPartner()
 							}
 						);
@@ -62,6 +65,7 @@ $(document).ready(
 );
 
 function getPartner() {
+	hasPartner = false;
 	$.getJSON(
 			'/Chat/getChatId?type=' + $.getUrlVar('type'), 
 			function(data) {
@@ -89,12 +93,18 @@ function getMessages() {
 			'/Chat/recv', {chatId: chatId}, 
 			function(data) {
 				if(data == false) {
-					addMessage('System', 'Your chat partner got disconnected. Please wait while we find you a new listener.')
+					if(true || hasPartner) {
+						hasPartner = false;
+						addMessage('System', 'Your chat partner got disconnected. Please wait while we find you a new listener.');
+					}
 					return getPartner();
 				}
 				else if(data == true) {
-					info('');
-					addMessage('System', 'A new chat partner has entered your chat.')
+					if(true || !hasPartner) {
+						info('');
+						addMessage('System', 'A new chat partner has entered your chat.');
+						hasPartner = true;
+					}
 				}
 				else if(data != null)
 					addMessage(other, data);

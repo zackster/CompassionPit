@@ -54,18 +54,22 @@ class ChatController(BaseController):
 			yield '-1'
 			return
 		
-		yield request.environ['cogen.call'](ventListenQueues[type ^ 1].get_nowait)()
-		if isinstance(request.environ['cogen.wsgi'].result, events.OperationTimeout):
-			pass
-		elif isinstance(request.environ['cogen.wsgi'].result, Exception):
-			pass
-		else:
-			ret = request.environ['cogen.wsgi'].result
-			if ret != None:
-				yield request.environ['cogen.call'](queues[ret][type][0].put)(True)
-				yield request.environ['cogen.call'](queues[ret][type ^ 1][0].put)(True)
-				yield json.dumps((ret << 1) | type)
-				return
+		while True:
+			yield request.environ['cogen.call'](ventListenQueues[type ^ 1].get_nowait)()
+			if isinstance(request.environ['cogen.wsgi'].result, events.OperationTimeout):
+				break
+			elif isinstance(request.environ['cogen.wsgi'].result, Exception):
+				break
+			else:
+				ret = request.environ['cogen.wsgi'].result
+				if ret != None:
+					if queues[ret][type ^ 1][1].isDead():
+						continue
+					yield request.environ['cogen.call'](queues[ret][type][0].put)(True)
+					yield request.environ['cogen.call'](queues[ret][type ^ 1][0].put)(True)
+					yield json.dumps((ret << 1) | type)
+					return
+				break
 		
 		id = curId
 		curId += 1
