@@ -105,7 +105,7 @@ function getMessages() {
 				else if(data == true) {
 					if(true || !hasPartner) {
 						info('');
-						addMessage('System', 'A new chat partner has entered your chat.');
+						addMessage('System', 'A new chat partner has entered your chat (#' + (chatId >> 1) + ').');
 						hasPartner = true;
 					}
 				}
