@@ -23,7 +23,10 @@
  
     <div id="tagline"><!-- Start Tagline DIV --> 
     <!-- Tagline Goes Here --> 
-    <h1><div id="status"></div></h1> 
+    <h1><div id="status"></div><form id="msgForm">
+		<input id="chatInput" type="text" /><input type="submit" />
+	</form>
+	</h1> 
     </div><!-- End Tagline DIV --> 
  
     <!-- Start Main Content --> 
@@ -31,13 +34,11 @@
     	<div id="column_left_chat"><!-- Start Left Column Chat DIV --> 
        	
 
-			<table id="chatWindow" width="100%"></table>
+			<table id="chatWindow" width="100%"><tr><td></td></tr>			</table>
 
-			<form id="msgForm">
-				<input id="chatInput" type="text" /><input type="submit" />
-			</form>
 			
         <br class="clear" />	
+
         </div><!-- End Left Column DIV --> 
  
  
