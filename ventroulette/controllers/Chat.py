@@ -65,6 +65,8 @@ class ChatController(BaseController):
 				if ret != None:
 					if queues[ret][type ^ 1][1].isDead():
 						continue
+					queues[ret][type][1].started = True
+					queues[ret][type][1].started = True
 					yield request.environ['cogen.call'](queues[ret][type][0].put)(True)
 					yield request.environ['cogen.call'](queues[ret][type ^ 1][0].put)(True)
 					yield json.dumps((ret << 1) | type)

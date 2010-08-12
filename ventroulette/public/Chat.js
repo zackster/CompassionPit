@@ -89,9 +89,12 @@ function addMessage(from, msg) {
 }
 
 function getMessages() {
+	var curChatId = chatId;
 	$.getJSON(
 			'/Chat/recv', {chatId: chatId}, 
 			function(data) {
+				if(curChatId != chatId)
+					return;
 				if(data == false) {
 					if(true || hasPartner) {
 						hasPartner = false;
