@@ -33,7 +33,7 @@ class DeadTimer(object):
 		self.update()
 	
 	def update(self):
-		self.time = time.clock()
+		self.time = time.time()
 	
 	@property
 	def idle(self):
