@@ -42,7 +42,7 @@ class DeadTimer(object):
 	def isDead(self):
 		if not self.started:
 			return False
-		return self.idle > 60
+		return self.idle > 30
 
 class ChatController(BaseController):
 	def index(self):
