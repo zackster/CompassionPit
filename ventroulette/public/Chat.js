@@ -95,7 +95,7 @@ function getPartner() {
 				initChat(data);
 			}
 		);
-	info('Waiting for chat partner... ');
+	info('Waiting for a chat partner... ');
 }
 
 function initChat(id) {
