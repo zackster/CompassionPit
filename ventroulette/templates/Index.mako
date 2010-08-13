@@ -43,17 +43,18 @@
 
     <div id="tagline"><!-- Start Tagline DIV -->
     <!-- Tagline Goes Here -->
-    <h1>Welcome to the anonymous friend &quot;vent-house&quot;.</h1>
+    <h1>Chat with an anonymous stranger who won't judge you</h1>
     </div><!-- End Tagline DIV -->
 
     <!-- Start Main Content -->
     <div id="main"><!-- Start Main DIV -->
     	<div id="column_left"><!-- Start Left Column DIV -->
        		<!-- Subheader Goes Here -->
-      		<h2>Get your troubles off your chest</h2>
+      		<h2>Connect with someone who will listen</h2>
        		<!-- Paragraph Of Text Goes Here -->
-    		<p>You want to share your feelings with another human being, but you can't talk to somebody you know - because let's face it, due to human nature, it's possible that they'll judge you for what you say, or use it against you in the future. CompassionPit is the solution to this: get anonymously connected to another compassionate human from around the world.</p>
+    		<p>You want to share your feelings, but you can't talk to somebody you know - because let's face it, they might judge you for it or use it against you in the future. CompassionPit is the solution to this: get anonymously connected to another compassionate human from around the world.</p>
       		<p><b>Pick an option to the right, and then you will be randomly connected to a chat with an anonymous partner.</b></p>  		    
+			<p>There are ${userCount} users chatting online now.</p>
       		<!-- End Paragraph Of Text -->
 
 			<br class="clear" />
