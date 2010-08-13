@@ -46,7 +46,18 @@ class DeadTimer(object):
 
 class ChatController(BaseController):
 	def index(self):
-		return render('Index.mako')
+		ids = queues.keys()
+		userCount = 0
+		for id in ids:
+			try:
+				queue = queues[id]
+				if queue[0][1].started:
+					userCount += 1
+				if queue[1][1].started:
+					userCount += 1
+			except:
+				pass
+		return render('Index.mako', dict(userCount=userCount))
 	
 	def chat(self):
 		type = request.params.get('type', None)
