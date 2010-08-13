@@ -87,18 +87,22 @@ class ChatController(BaseController):
 			chatId = u''
 		msg = request.params.get('msg', u'')
 		if u'' in (chatId, msg):
-			yield json.dumps(False)
+			yield 'false'
 		
 		a, b = chatId >> 1, (chatId & 1) ^ 1
+		if not a in queues:
+			yield 'false'
+			return
+		
 		yield request.environ['cogen.call'](queues[a][b][0].put)(cgi.escape(msg))
 		val = request.environ['cogen.wsgi'].result
-		yield json.dumps(True)
+		yield 'true'
 	
 	def recv(self):
 		try:
 			chatId = int(request.params.get('chatId', u''))
 		except:
-			yield json.dumps(False)
+			yield 'false'
 			return
 		
 		a, b = chatId >> 1, chatId & 1
@@ -129,11 +133,12 @@ class ChatController(BaseController):
 		try:
 			chatId = int(request.params.get('chatId', u''))
 		except:
-			yield json.dumps(False)
+			yield 'false'
 			return
 		
 		a, b = chatId >> 1, (chatId & 1) ^ 1
-		yield request.environ['cogen.call'](queues[a][b][0].put)(False)
-		val = request.environ['cogen.wsgi'].result
-		del queues[a]
-		yield json.dumps(True)
+		if a in queues:
+			yield request.environ['cogen.call'](queues[a][b][0].put)(False)
+			val = request.environ['cogen.wsgi'].result
+			del queues[a]
+		yield 'true'
