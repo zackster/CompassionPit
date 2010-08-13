@@ -110,6 +110,8 @@ var count = 0;
 function addMessage(from, msg) {
 	var cls = ((count++ & 1) == 0) ? 'chatMessageEven' : 'chatMessageOdd';
 	var row = $('#chatWindow > tbody:last').append('<tr class="' + cls + '"><td>' + from + ': ' + msg + '</td></tr>');
+	var scrolDiv = document.getElementById("column_left_chat"); //scroll to bottom of chat
+	scrollDiv.scrollTop = scrollDiv.scrollHeight;	
 }
 
 function getMessages() {

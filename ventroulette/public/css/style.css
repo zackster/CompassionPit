@@ -65,6 +65,7 @@ img#logo {
 	background-color: #FFFFFF;
 	height: 300px;
 	border: 1px solid #4A7A8A;
+	overflow: scroll;
 }
 
 #column_left_chat_type {
