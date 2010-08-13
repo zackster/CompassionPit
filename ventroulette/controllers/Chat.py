@@ -37,7 +37,7 @@ class DeadTimer(object):
 	
 	@property
 	def idle(self):
-		return time.clock() - self.time
+		return time.time() - self.time
 	
 	def isDead(self):
 		if not self.started:
