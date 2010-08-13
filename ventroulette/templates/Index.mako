@@ -43,7 +43,7 @@
 
     <div id="tagline"><!-- Start Tagline DIV -->
     <!-- Tagline Goes Here -->
-    <h1>Talk with an anonymous stranger who won't judge you</h1>
+    <h1>Chat with an anonymous stranger who won't judge you</h1>
     </div><!-- End Tagline DIV -->
 
     <!-- Start Main Content -->
