@@ -66,14 +66,18 @@ $(document).ready(
 		
 		$('#newPartner').click(
 				function() {
-					$.getJSON(
-							'/Chat/newPartner', {chatId: chatId}, 
-							function(data) {
-								hasPartner = false;
-								addMessage('System', 'Please wait while we find you a new chat partner.');
-								getPartner()
-							}
-						);
+					if(hasPartner) {
+						var oldChatId = chatId;
+						chatId = -1;
+						hasPartner = false;
+						$.getJSON(
+								'/Chat/newPartner', {chatId: oldChatId}, 
+								function(data) {
+									addMessage('System', 'Please wait while we find you a new chat partner.');
+									getPartner()
+								}
+							);
+					}
 				}
 			);
 		
@@ -115,18 +119,13 @@ function getMessages() {
 				if(curChatId != chatId)
 					return;
 				if(data == false) {
-					if(true || hasPartner) {
-						hasPartner = false;
-						addMessage('System', 'Your chat partner got disconnected. Please wait while we find you a new listener.');
-					}
+					addMessage('System', 'Your chat partner got disconnected. Please wait while we find you a new listener.');
 					return getPartner();
 				}
 				else if(data == true) {
-					if(true || !hasPartner) {
-						info('');
-						addMessage('System', 'A new chat partner has entered your chat (#' + (chatId >> 1) + ').');
-						hasPartner = true;
-					}
+					info('');
+					addMessage('System', 'A new chat partner has entered your chat (#' + (chatId >> 1) + ').');
+					hasPartner = true;
 				}
 				else if(data != null)
 					addMessage(other, data);
