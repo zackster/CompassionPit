@@ -55,6 +55,7 @@
     		<p>You want to share your feelings, but you can't talk to somebody you know - because let's face it, they might judge you for it or use it against you in the future. CompassionPit is the solution to this: get anonymously connected to another compassionate human from around the world.</p>
       		<p><b>Pick an option to the right, and then you will be randomly connected to a chat with an anonymous partner.</b></p>  		    
 			<p>There are ${userCount} users chatting online now.</p>
+
       		<!-- End Paragraph Of Text -->
 
 			<br class="clear" />
@@ -67,7 +68,7 @@
 					<ul>
 						<li><a href="/Chat/chat?type=venter">Share your troubles</a></li>
 						<li><a href="/Chat/chat?type=listener">Participate as a listener</a></li>
-
+<br /><br /><br /><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.compassionpit.com&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
 					</ul>
 			</div><!-- End Right Column Buttons -->
         </div><!-- End Right Column DIV -->
