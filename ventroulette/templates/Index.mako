@@ -1,13 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
+<script type="text/javascript">
+  var _kmq = _kmq || [];
+  function _kms(u){
+    setTimeout(function(){
+      var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+      s.src = u; f.parentNode.insertBefore(s, f);
+    }, 1);
+  }
+  _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/42d8f6ead7caea0acad879301d830970aa2be630.1.js');
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Feeling down? CompassionPit makes it easy to find an anonymous friend to share your troubles with, without fear of being blackmailed later on.">
 <title>CompassionPit</title>
 <!-- Link to the reset CSS sheet -->
 <link rel="stylesheet" href="css/reset.css" type="text/css" />
 <!-- Link to the style CSS sheet -->
 <link rel="stylesheet" href="css/style.css" type="text/css" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17971348-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
 
 <body>
@@ -29,7 +52,7 @@
        		<!-- Subheader Goes Here -->
       		<h2>Get your troubles off your chest</h2>
        		<!-- Paragraph Of Text Goes Here -->
-    		<p>Ever have something weighing you down and you just want to get it off your chest? You want to communicate with another human being, but you can't talk to somebody you know - because due to human nature, it's possible that they'll judge you for what you say, or use it against you in the future? CompassionPit is the solution to this: get anonymously connected to another compassionate human from around the world.</p>
+    		<p>You want to share your feelings with another human being, but you can't talk to somebody you know - because let's face it, due to human nature, it's possible that they'll judge you for what you say, or use it against you in the future. CompassionPit is the solution to this: get anonymously connected to another compassionate human from around the world.</p>
       		<p><b>Pick an option to the right, and then you will be randomly connected to a chat with an anonymous partner.</b></p>  		    
       		<!-- End Paragraph Of Text -->
 
