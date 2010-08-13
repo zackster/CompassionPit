@@ -35,10 +35,14 @@ class DeadTimer(object):
 	def update(self):
 		self.time = time.clock()
 	
+	@property
+	def idle(self):
+		return time.clock() - self.time
+	
 	def isDead(self):
 		if not self.started:
 			return False
-		return time.clock() - self.time > 60
+		return self.idle > 60
 
 class ChatController(BaseController):
 	def index(self):
@@ -153,6 +157,8 @@ class ChatController(BaseController):
 			del queues[a]
 			yield 'false'
 			return
+		else:
+			log.info('[recv] (%r, %r) is %i secs idle (started==%r)' % (a, b, queues[a][b^1][1].idle, queues[a][b^1][1].started))
 		# Get message from queue, returning null if it doesn't exist.
 		yield request.environ['cogen.call'](queues[a][b][0].get)(timeout=10)
 		if isinstance(request.environ['cogen.wsgi'].result, events.OperationTimeout):
