@@ -54,6 +54,18 @@ var chatId = -1;
 var other;
 var hasPartner = false;
 
+function newPartner(cb) {
+	if(hasPartner) {
+		var oldChatId = chatId;
+		chatId = -1;
+		hasPartner = false;
+		$.getJSON(
+				'/Chat/newPartner', {chatId: oldChatId}, 
+				cb
+			);
+	}
+}
+
 $(document).ready(
 	function() {
 		info('Initializing');
@@ -67,20 +79,19 @@ $(document).ready(
 		
 		$('#newPartner').click(
 				function() {
-					if(hasPartner) {
-						var oldChatId = chatId;
-						chatId = -1;
-						hasPartner = false;
-						$.getJSON(
-								'/Chat/newPartner', {chatId: oldChatId}, 
-								function(data) {
-									addMessage('System', 'Please wait while we find you a new chat partner.');
-									getPartner()
-								}
-							);
-					}
+					newPartner(
+							function(data) {
+								addMessage('System', 'Please wait while we find you a new chat partner.');
+								getPartner()
+							}
+						);
 				}
 			);
+		
+		window.onbeforeunload =
+			function() {
+				newPartner(function() {});
+			};
 		
 		other = ($.getUrlVar('type') == 'listener') ? 'Venter' : 'Listener';
 		
