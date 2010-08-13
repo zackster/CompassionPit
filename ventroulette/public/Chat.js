@@ -39,6 +39,7 @@ function status(msg, class) {
 	status.addClass(class);
 	status.html(msg);
 	if(msgform) {
+		$('#chatInput').focus();
 		$('#msgForm').submit(
 				function() {
 					sendMessage();
