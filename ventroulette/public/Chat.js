@@ -24,10 +24,29 @@ function error(msg) {
 }
 
 function status(msg, class) {
+	
+	
+	if(msg == '') {
+		msg = '<form id="msgForm"><input id="chatInput" type="text" size=90 /><input type="submit" value="Send Chat"  /></form>';
+		msgform = true;
+	}
+	else {
+		msgform = false;
+	}
+	
 	var status = $('#status');
 	status.removeClass('errorMessage infoMessage');
 	status.addClass(class);
 	status.html(msg);
+	if(msgform) {
+		$('#msgForm').submit(
+				function() {
+					sendMessage();
+					return false;
+				}
+			);
+	}
+	
 }
 
 var chatId = -1;

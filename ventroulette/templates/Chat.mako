@@ -17,16 +17,17 @@
 <div id="container"><!-- Start Container DIV --> 
 	<div id="header"><!-- Start Header DIV -->	
     <!-- Logo Goes Here --> 
-	<a href="index.html"><img src="/img/logo.png" alt="Logo" width="250" height="70" border="0" id="logo" /></a> 
+	<a href="/"><img src="/img/logo.png" alt="Logo" width="250" height="70" border="0" id="logo" /></a> 
 	</div> 
 	<!-- End Header DIV --> 
  
     <div id="tagline"><!-- Start Tagline DIV --> 
     <!-- Tagline Goes Here --> 
-    <h1><div id="status"></div><form id="msgForm">
-		<input id="chatInput" type="text" /><input type="submit" />
-	</form>
-	</h1> 
+	<h1>
+		<div id="status">	
+			<form id="msgForm" style="display:none"><input id="chatInput" type="text" size=90 /><input type="submit" value="Send Chat"  /></form>
+		</div>
+	</h1>
     </div><!-- End Tagline DIV --> 
  
     <!-- Start Main Content --> 
@@ -46,7 +47,7 @@
 			<div id="buttons1"><!-- Start Right Column Buttons --> 
 					<ul> 
 						<li><a href="#" id="newPartner">Find a new partner</a></li> 
-						<li><a href="#" title="Link 2">Report ABUSE</a></li> 
+						<li style="display:none"><a href="#" title="Link 2">Report ABUSE</a></li> 
 					</ul> 
 			</div><!-- End Right Column Buttons --> 
         </div><!-- End Right Column DIV --> 
@@ -59,10 +60,10 @@
     <div id="copyright_notice"><span>© 2010</span> CompassionPit.com All rights reserved.</div><!-- Copyright Notice --> 
    		<div id="nav"><!-- Start Links DIV --> 
             <ul id="links"><!-- Start Links UL --> 
-                <li><a href="index.html" title="Home">Home</a></li> 
-                <li><a href="about-us.html" title="About Us">About Us</a></li> 
-                <li><a href="#" title="Terms Of Service">Terms of Service</a></li> 
-                <li><a href="#" title="Privacy Policy">Privacy Policy</a></li> 
+                <li><a href="/" title="Home">Home</a></li> 
+                <li><a href="/about-us.html" title="About Us">About Us</a></li> 
+                <li><a href="/tos.html" title="Terms Of Service">Terms of Service</a></li> 
+                <li><a href="/privacypolicy.html" title="Privacy Policy">Privacy Policy</a></li> 
             </ul><!-- End Links UL --> 
     	</div><!-- End Links DIV --> 
     </div><!-- End Footer DIV --> 
