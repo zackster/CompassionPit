@@ -64,8 +64,8 @@ class ChatController(BaseController):
 				ret = request.environ['cogen.wsgi'].result
 				if ret != None:
 					if queues[ret][type ^ 1][1].isDead():
+						del queues[ret]
 						continue
-					queues[ret][type][1].started = True
 					queues[ret][type][1].started = True
 					yield request.environ['cogen.call'](queues[ret][type][0].put)(True)
 					yield request.environ['cogen.call'](queues[ret][type ^ 1][0].put)(True)
@@ -76,6 +76,7 @@ class ChatController(BaseController):
 		id = curId
 		curId += 1
 		queues[id] = ((queue.Queue(), DeadTimer()), (queue.Queue(), DeadTimer()))
+		queues[id][type][1].started = True
 		yield request.environ['cogen.call'](ventListenQueues[type].put)(id)
 		val = request.environ['cogen.wsgi'].result
 		yield json.dumps((id << 1) | type)
