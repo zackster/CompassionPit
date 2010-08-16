@@ -72,7 +72,6 @@ $(window).bind("blur", function() {
 });
 $(window).bind("focus", function() {
 	hasFocus = true;
-	console.log('focus has been found.');
 	document.title = 'CompassionPit | Chat'; 
 });
 
