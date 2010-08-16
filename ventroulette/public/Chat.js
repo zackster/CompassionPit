@@ -66,6 +66,16 @@ function newPartner(cb) {
 	}
 }
 
+var hasFocus = true;
+$(window).bind("blur", function() { 
+	hasFocus = false;
+});
+$(window).bind("focus", function() {
+	hasFocus = true;
+	console.log('focus has been found.');
+	document.title = 'CompassionPit | Chat'; 
+});
+
 $(document).ready(
 	function() {
 		info('Initializing');
@@ -117,12 +127,35 @@ function initChat(id) {
 }
 
 var count = 0;
-
+var i = 0;
+var titleCurrentlyChanging = false;
 function addMessage(from, msg) {
 	var cls = ((count++ & 1) == 0) ? 'chatMessageEven' : 'chatMessageOdd';
 	var row = $('#chatWindow > tbody:last').append('<tr class="' + cls + '"><td>' + from + ': ' + msg + '</td></tr>');
 	var scrollDiv = document.getElementById("column_left_chat"); //scroll to bottom of chat
 	scrollDiv.scrollTop = scrollDiv.scrollHeight;	
+	if(!hasFocus && !titleCurrentlyChanging) {
+		changeTitle();
+	}
+}
+
+function changeTitle() {
+	i++;
+	if(i%2) {
+		document.title = 'New message on CompassionPit!';
+	}
+	else {
+		document.title = 'CompassionPit | Chat';
+	}
+	if(!hasFocus) {
+		titleCurrentlyChanging = true;
+		setTimeout('changeTitle()',1000);
+	}
+	else {
+		titleCurrentlyChanging = false;
+		i=0;
+		document.title = 'CompassionPit | Chat';
+	}
 }
 
 function getMessages() {
