@@ -166,7 +166,7 @@ function getMessages() {
 				if(curChatId != chatId)
 					return;
 				if(data == false) {
-					addMessage('System', 'Your chat partner got disconnected. Please wait while we find you a new listener.');
+					addMessage('System', 'Your chat partner got disconnected. Please wait while we find you a new ' + other + '.');
 					return getPartner();
 				}
 				else if(data == true) {
