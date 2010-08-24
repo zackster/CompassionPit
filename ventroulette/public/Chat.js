@@ -135,6 +135,10 @@ function addMessage(from, msg) {
 	scrollDiv.scrollTop = scrollDiv.scrollHeight;	
 	if(!hasFocus && !titleCurrentlyChanging) {
 		changeTitle();
+		if($("#enable_sound").is(':checked')) {					
+			/* Play the Gong sound */		
+			alert('Gong.');
+		}
 	}
 }
 
