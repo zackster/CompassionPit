@@ -69,6 +69,7 @@
 			<div id="buttons1"><!-- Start Right Column Buttons --> 
 					<ul> 
 						<li><a href="#" id="newPartner">Find a new partner</a></li> 
+						<li style="font-family:Arial, Helvetica, sans-serif;font-size:.8em"><input type="checkbox" id="enable_sound" checked />Enable sound</li>
 						<li style="display:none"><a href="#" title="Link 2">Report ABUSE</a></li> 
 					</ul> 
 			</div><!-- End Right Column Buttons --> 
