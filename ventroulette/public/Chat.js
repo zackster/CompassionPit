@@ -150,10 +150,10 @@ function addMessage(from, msg) {
 	var row = $('#chatWindow > tbody:last').append('<tr class="' + cls + '"><td>' + from + ': ' + msg + '</td></tr>');
 	var scrollDiv = document.getElementById("column_left_chat"); //scroll to bottom of chat
 	scrollDiv.scrollTop = scrollDiv.scrollHeight;	
-	if(!hasFocus) {
-		gong();
-		if(!titleCurrentlyChanging) {
-			changeTitle();
+	if(!hasFocus && !titleCurrentlyChanging) {
+		changeTitle();
+		if($("#enable_sound").is(':checked')) {
+			gong();
 		}
 	}
 }
