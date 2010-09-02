@@ -126,16 +126,11 @@ function initChat(id) {
 }
 
 var gongAudio = null;
-try {
-	gongAudio = document.createElement('audio');
-	gongAudio.setAttribute('src', 'gong.mp3');
-	gongAudio.setAttribute('autobuffer', 'true');
-} catch(e) {
-	gongAudio = null;
-}
-
 function gong() {
-	if(gongAudio != null) {
+	if(gongAudio == null)
+		gongAudio = document.getElementById('gongplayer');
+	if(typeof gongAudio.play != 'undefined') {
+		gongAudio.currentTime = 0;
 		gongAudio.play();
 	}
 }

@@ -36,6 +36,9 @@
 </head> 
  
 <body> 
+	<audio id="gongplayer" controls="false" preload="auto" style="display: none">
+		<source src="/gong.mp3" type="audio/mpeg" />
+	</audio>
 <div id="container"><!-- Start Container DIV --> 
 	<div id="header"><!-- Start Header DIV -->	
     <!-- Logo Goes Here --> 
