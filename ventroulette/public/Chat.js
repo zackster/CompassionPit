@@ -129,9 +129,12 @@ var gongAudio = null;
 function gong() {
 	if(gongAudio == null)
 		gongAudio = document.getElementById('gongplayer');
-	if(typeof gongAudio.play != 'undefined') {
-		gongAudio.currentTime = 0;
-		gongAudio.play();
+	try {
+		if(typeof gongAudio.play != 'undefined') {
+			gongAudio.currentTime = 0;
+			gongAudio.play();
+		}
+	} catch(err) {
 	}
 }
 
