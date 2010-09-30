@@ -2,7 +2,7 @@ try:
 	import json
 except:
 	import simplejson as json
-import cgi, logging, time
+import cgi, logging, threading, time
 
 from cogen.core import queue, events
 from cogen.core.coroutines import coro
@@ -17,8 +17,9 @@ from ventroulette.lib.base import BaseController, render
 log = logging.getLogger(__name__)
 
 curId = 0
-ventListenQueues = queue.Queue(), queue.Queue()
+ventListenQueues = [], []
 queues = {}
+queueLock = threading.Lock()
 
 class DeadTimer(object):
 	"""
@@ -77,35 +78,30 @@ class ChatController(BaseController):
 			yield '-1'
 			return
 		
-		while True:
+		queueLock.acquire()
+		oqueue = ventListenQueues[type ^ 1]
+		while len(oqueue):
 			# Attempt to find a waiting user.
-			yield request.environ['cogen.call'](ventListenQueues[type ^ 1].get_nowait)()
-			if isinstance(request.environ['cogen.wsgi'].result, events.OperationTimeout):
-				break
-			elif isinstance(request.environ['cogen.wsgi'].result, Exception):
-				break
-			else:
-				ret = request.environ['cogen.wsgi'].result
-				if ret != None:
-					log.info('[getChatId] Found queue, %r' % ret)
-					# Got a user.  Check to make sure the queue is still there and not taken.
-					if not ret in queues or queues[ret][type][1].started:
-						log.info('[getChatId] Queue %r nonexistent or started.' % ret)
-						continue
-					# Check to make sure the queue hasn't died.  Delete it if it has.
-					if queues[ret][type ^ 1][1].isDead():
-						log.info('[getChatId] Queue %r is dead.' % ret)
-						del queues[ret]
-						continue
-					# Start new user's dead timer, push True onto both sides of the queue to start.
-					log.info('[getChatId] Queue %r is good.' % ret)
-					queues[ret][type][1].started = True
-					yield request.environ['cogen.call'](queues[ret][type][0].put)(True)
-					yield request.environ['cogen.call'](queues[ret][type ^ 1][0].put)(True)
-					# Send back chat ID
-					yield json.dumps((ret << 1) | type)
-					return
-				break
+			ret = oqueue.pop(0)
+			log.info('[getChatId] Found queue, %r' % ret)
+			# Got a user.  Check to make sure the queue is still there and not taken.
+			if not ret in queues or queues[ret][type][1].started:
+				log.info('[getChatId] Queue %r nonexistent or started.' % ret)
+				continue
+			# Check to make sure the queue hasn't died.  Delete it if it has.
+			if queues[ret][type ^ 1][1].isDead():
+				log.info('[getChatId] Queue %r is dead.' % ret)
+				del queues[ret]
+				continue
+			queueLock.release()
+			# Start new user's dead timer, push True onto both sides of the queue to start.
+			log.info('[getChatId] Queue %r is good.' % ret)
+			queues[ret][type][1].started = True
+			yield request.environ['cogen.call'](queues[ret][type][0].put)(True)
+			yield request.environ['cogen.call'](queues[ret][type ^ 1][0].put)(True)
+			# Send back chat ID
+			yield json.dumps((ret << 1) | type)
+			return
 		
 		# No waiting user found.  Create a new queue.
 		id = curId
@@ -115,8 +111,8 @@ class ChatController(BaseController):
 		# Start dead timer.
 		queues[id][type][1].started = True
 		# Add id to the waiting user queue.
-		yield request.environ['cogen.call'](ventListenQueues[type].put)(id)
-		val = request.environ['cogen.wsgi'].result
+		ventListenQueues[type].append(id)
+		queueLock.release()
 		# Send back chat ID
 		yield json.dumps((id << 1) | type)
 	
@@ -204,3 +200,27 @@ class ChatController(BaseController):
 			yield request.environ['cogen.call'](queues[a][b][0].put)(False)
 			del queues[a]
 		yield 'true'
+	
+	def queueDebug(self):
+		queueLock.acquire()
+		
+		ret = 'Waiting listeners: %i Venters: %i<br>' % (len(ventListenQueues[0]), len(ventListenQueues[1]))
+		ids = queues.keys()
+		for id in ids:
+			try:
+				queue = queues[id]
+				ret += 'Queue %i:&nbsp;' % id
+				if queue[0][1].started:
+					ret += '&nbsp;started&nbsp;'
+				else:
+					ret += '!started&nbsp;'
+				if queue[1][1].started:
+					ret += '&nbsp;started'
+				else:
+					ret += '!started'
+				ret += '<br>'
+			except:
+				pass
+		
+		queueLock.release()
+		return ret
