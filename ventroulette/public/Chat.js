@@ -77,7 +77,20 @@ $(window).bind("focus", function() {
 
 $(document).ready(
 	function() {
+		$('#enable_sound').attr('checked', true);
 		info('Initializing');
+		
+		try {
+			function audioReady() {
+				this.element.jPlayer('setFile', '/gong.mp3');
+			}
+			$('#audioPlayer').jPlayer({
+				ready: audioReady, 
+				swfPath: '/', 
+				reload: 'auto'
+			});
+		} catch(e) {
+		}
 		
 		$('#msgForm').submit(
 				function() {
@@ -125,15 +138,10 @@ function initChat(id) {
 	getMessages();
 }
 
-var gongAudio = null;
 function gong() {
-	if(gongAudio == null)
-		gongAudio = document.getElementById('gongplayer');
 	try {
-		if(typeof gongAudio.play != 'undefined') {
-			gongAudio.currentTime = 0;
-			gongAudio.play();
-		}
+		$('#audioPlayer').jPlayer('playHead', 0);
+		$('#audioPlayer').jPlayer('play');
 	} catch(err) {
 	}
 }
@@ -142,8 +150,6 @@ var count = 0;
 var i = 0;
 var titleCurrentlyChanging = false;
 function addMessage(from, msg) {
-	gong();
-	gong();
 	var cls = ((count++ & 1) == 0) ? 'chatMessageEven' : 'chatMessageOdd';
 	var row = $('#chatWindow > tbody:last').append('<tr class="' + cls + '"><td>' + from + ': ' + msg + '</td></tr>');
 	var scrollDiv = document.getElementById("column_left_chat"); //scroll to bottom of chat

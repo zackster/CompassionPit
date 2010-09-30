@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/css/style.css" type="text/css" /> 
 <link href="/ventroulette.css" rel="stylesheet" type="text/css" />
 <script language="Javascript" src="/jquery-1.3.2.js"></script>
+<script language="Javascript" src="/jquery.jplayer.min.js"></script>
 <script language="Javascript" src="/Chat.js"></script>
 <script type="text/javascript">
 
@@ -36,9 +37,7 @@
 </head> 
  
 <body> 
-	<audio id="gongplayer" controls="false" preload="auto" style="display: none">
-		<source src="/gong.mp3" type="audio/mpeg" />
-	</audio>
+	<div id="audioPlayer"></div>
 <div id="container"><!-- Start Container DIV --> 
 	<div id="header"><!-- Start Header DIV -->	
     <!-- Logo Goes Here --> 
@@ -72,7 +71,7 @@
 			<div id="buttons1"><!-- Start Right Column Buttons --> 
 					<ul> 
 						<li><a href="#" id="newPartner">Find a new partner</a></li> 
-						<li style="font-family:Arial, Helvetica, sans-serif;font-size:.8em"><input type="checkbox" id="enable_sound" checked />Enable sound</li>
+						<li style="font-family:Arial, Helvetica, sans-serif;font-size:.8em"><input type="checkbox" id="enable_sound" />Enable sound</li>
 						<li style="display:none"><a href="#" title="Link 2">Report ABUSE</a></li> 
 					</ul> 
 			</div><!-- End Right Column Buttons --> 
