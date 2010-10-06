@@ -16,11 +16,11 @@ $.extend({
 });
 
 function info(msg) {
-	status(msg, 'infoMessage')
+	status(msg, 'infoMessage');
 }
 
 function error(msg) {
-	status(msg, 'errorMessage')
+	status(msg, 'errorMessage');
 }
 
 function status(msg, class) {
