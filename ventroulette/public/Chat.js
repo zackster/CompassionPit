@@ -23,7 +23,7 @@ function error(msg) {
 	status(msg, 'errorMessage');
 }
 
-function status(msg, class) {
+function status(msg, cssClass) {
 	
 	
 	if(msg == '') {
@@ -36,7 +36,7 @@ function status(msg, class) {
 	
 	var status = $('#status');
 	status.removeClass('errorMessage infoMessage');
-	status.addClass(class);
+	status.addClass(cssClass);
 	status.html(msg);
 	if(msgform) {
 		$('#chatInput').focus();
