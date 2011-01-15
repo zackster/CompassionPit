@@ -54,7 +54,17 @@
        		<!-- Paragraph Of Text Goes Here -->
     		<p>You want to share your feelings, but you can't talk to somebody you know - because let's face it, they might judge you for it or use it against you in the future. CompassionPit is the solution to this: get anonymously connected to another compassionate human from around the world.</p>
       		<p><b>Pick an option to the right, and then you will be randomly connected to a chat with an anonymous partner.</b></p>  		    
-			<p>There are ${userCount} users chatting online now.</p>
+
+			% if userCount:
+				<p>There are ${listenerCount} listeners and ${venterCount} venters.</p>
+				% if venterCount > listenerCount:
+					<p><b>There are venters who need someone to talk to -- please join as a listener.</b></p>
+				% elif listenerCount > venterCount:
+					<p><b>If you join as a listener and aren't immediately paired up with a venter, your computer will play a sound when a venter joins your chat.</b></p>
+				% endif
+			% else:
+				<p><b>Nobody's online right now, please join in and keep things going!</b><p>
+			% endif			
 
       		<!-- End Paragraph Of Text -->
 
